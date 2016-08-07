@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="Revolución - KEFIR - igdc #136" package="ru.miriti.revolucion" version="1.0.0" company="KEFIR" />
+	<app main="Main" path="Export" file="Revolucion" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+
+	<assets path="Assets" rename="assets" />
+
+	<window width="1280" height="720" fps="60" title="Revolución" resizable="false" />
+
+</project>
