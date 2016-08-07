@@ -4,6 +4,7 @@ import openfl.display.Sprite;
 import openfl.display.Bitmap;
 import openfl.Assets;
 import openfl.events.Event;
+import openfl.events.MouseEvent;
 import motion.Actuate;
 
 class Menu extends Sprite {
@@ -24,13 +25,19 @@ class Menu extends Sprite {
 
     addChild(logo);
 
-    var btnPlay = new Bitmap(Assets.getBitmapData("assets/btn_play.png"));
-    btnPlay.x = (1280 - btnPlay.width) / 2;
-    btnPlay.y = (720 - 250/2);
+    var btnPlay = new GameButton(new Bitmap(Assets.getBitmapData("assets/btn_play.png")));
+
+    btnPlay.x = 1280 / 2;
+    btnPlay.y = (720 - 250 / 2);
+
+    btnPlay.addEventListener(MouseEvent.CLICK, function(event:MouseEvent) {
+      dispatchEvent(new Event("start_game"));
+    });
+
     addChild(btnPlay);
 
     addEventListener(Event.ADDED_TO_STAGE, function name(event:Event) {
-      Actuate.tween(this, 1, {alpha: 1});
+      Actuate.tween(this, 2, {alpha: 1});
     });
 
   }

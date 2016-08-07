@@ -1,15 +1,12 @@
 package;
 
-
+import openfl.events.Event;
 import openfl.display.Sprite;
 import motion.Actuate;
-import openfl.events.Event;
 
 class Main extends Sprite {
 
-
 	public function new () {
-
 		super ();
 
 		var intro = new Intro();
@@ -17,7 +14,18 @@ class Main extends Sprite {
 
 		intro.addEventListener("end", function(event:Event) {
 			removeChild(intro);
-			addChild(new Menu());
+			var menu = new Menu();
+
+			menu.addEventListener("start_game", function(event:Event) {
+				Actuate.tween(menu, 1, {alpha: 0}).onComplete(function(event) {
+					removeChild(menu);
+
+					var gameMain = new GameMain();
+					addChild(gameMain);
+				});
+			});
+
+			addChild(menu);
 		});
 
 	}
