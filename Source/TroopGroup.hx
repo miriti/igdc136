@@ -62,8 +62,6 @@ class TroopGroup {
     space.y = y;
     space.rotation = ((Math.atan2(vector.y, vector.x) * 180) / Math.PI)-90;
 
-    trace( space.rotation );
-
     for(i in 0...troops.length) {
       var obj = new Sprite();
 
@@ -71,7 +69,7 @@ class TroopGroup {
       obj.graphics.drawRect(-10, -10, 20, 20);
       obj.graphics.endFill();
 
-      obj.x = distr[col] * 30;
+      obj.x = distr[distr.length-1-col] * 30;
       obj.y = row * 30;
 
       space.addChild(obj);

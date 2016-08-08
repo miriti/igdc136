@@ -3,6 +3,7 @@ package ;
 import openfl.display.BitmapData;
 import openfl.display.Bitmap;
 import openfl.Assets;
+import motion.Actuate;
 
 class Troop extends GameObject  {
 
@@ -35,48 +36,15 @@ class Troop extends GameObject  {
       target_x = x = new_x;
       target_y = y = new_y;
     } else {
-      target_x = new_x;
-      target_y = new_y;
+      var len = Math.sqrt(Math.pow(new_x-x, 2) + Math.pow(new_y - y, 2));
+
+      Actuate.tween(this, len/100, {x:new_x,y:new_y});
     }
   }
 
   public override function update(delta:Float):Void {
     bitmap.y = -bitmap.width / 2 + Math.sin(jump_phase) * 2;
     jump_phase += (Math.PI * 3) * delta;
-
-    var d = 100*delta;
-
-    if(x != target_x) {
-      if(x<target_x) {
-        x+=d;
-        if(x>=target_x) {
-          x=target_x;
-        }
-      }
-
-      if(x>target_x) {
-        x-=d;
-        if(x<=target_x){
-          x=target_x;
-        }
-      }
-    }
-
-    if(y != target_y) {
-      if(y<target_y) {
-        y+=d;
-        if(y>=target_y) {
-          y=target_y;
-        }
-      }
-
-      if(y>target_y) {
-        y-=d;
-        if(y<=target_y){
-          y=target_y;
-        }
-      }
-    }
   }
 
 }
