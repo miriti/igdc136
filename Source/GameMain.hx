@@ -12,6 +12,7 @@ class GameMain extends Sprite  {
   var dragging_current:Point = new Point();
   var dragging_last:Point = new Point();
 
+  var policeGroup:TroopGroup = new TroopGroup();
   var group:TroopGroup = new TroopGroup();
 
   public function new() {
@@ -20,13 +21,22 @@ class GameMain extends Sprite  {
     gameField = new GameField();
     addChild(gameField);
 
-    for(i in 0...5*10) {
-        var t = new Troop();
+    for(i in 0...50) {
+        var t = new RedTroop();
         group.add(t);
-        gameField.addChild(t);
+        gameField.addTroop(t);
     }
 
-    group.goto(0, 0, true, gameField);
+    group.goto(300, 0, true, gameField);
+
+
+    for(i in 0...50) {
+      var p = new BlueTroop();
+      policeGroup.add(p);
+      gameField.addTroop(p);
+    }
+
+    policeGroup.goto(-300, 0, true, gameField);
 
     addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
     addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);

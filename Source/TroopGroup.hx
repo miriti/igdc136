@@ -32,6 +32,10 @@ class TroopGroup {
    * Go to
    */
   public function goto(x:Float, y: Float, imm:Bool, at:Sprite): Void {
+    troops = troops.filter(function(t) {
+      return t.healthPoints>0;
+      });
+      
     troops.sort(function(a:Troop,b:Troop):Int {
         var la = Math.pow(x - a.x,2) + Math.pow(y - a.y, 2);
         var lb = Math.pow(x - b.x,2) + Math.pow(y - b.y, 2);
@@ -62,7 +66,9 @@ class TroopGroup {
     space.y = y;
     space.rotation = ((Math.atan2(vector.y, vector.x) * 180) / Math.PI)-90;
 
-    for(i in 0...troops.length) {
+    var troops_queue = troops.copy();
+
+    while(troops_queue.length > 0) {
       var obj = new Sprite();
 
       obj.graphics.beginFill(0xff0000);
@@ -85,7 +91,14 @@ class TroopGroup {
         row++;
       }
 
-      var troop = troops[i];
+      troops_queue.sort(function(a:Troop, b:Troop):Int {
+          var la = Math.pow(new_x - a.x,2) + Math.pow(new_y - a.y, 2);
+          var lb = Math.pow(new_x - b.x,2) + Math.pow(new_y - b.y, 2);
+          if(la==lb) return 0;
+          return la > lb ? 1 : -1;
+      });
+
+      var troop = troops_queue.shift();
 
       troop.goto(new_x, new_y, imm);
     }

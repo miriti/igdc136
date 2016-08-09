@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-112.14286"
-     inkscape:cy="520"
+     inkscape:zoom="5.6"
+     inkscape:cx="889.25077"
+     inkscape:cy="377.15112"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,7 +54,8 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-332.3623)">
+     transform="translate(0,-332.3623)"
+     style="display:inline">
     <image
        y="-43.351986"
        x="-58.57143"
@@ -65,4 +66,22 @@
        height="300"
        width="1500" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline"
+     sodipodi:insensitive="true" />
+  <path
+     style="fill:#0523c1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 924.46373,301.74331 c -1.58978,-8e-5 -2.87866,1.8178 -2.87891,4.06054 4.8e-4,1.35086 0.47706,2.61296 1.27148,3.36719 l -0.12627,1.03789 -2.90888,0.41186 -9.07539,8.60337 2.5,2.40381 6.75508,-5.91396 0.33408,9.53769 -2.47862,17.21739 3.75,0.0301 1.96485,-16.07031 1.78515,0 1.85997,15.89258 3.67714,0 -2.30087,-16.60742 -0.0214,-10.53516 7.34365,6.25 1.92012,-2.64663 -9.17158,-8.16441 -2.69707,-0.36611 -0.25254,-0.79355 c 0.99491,-0.67646 1.62778,-2.09626 1.6289,-3.6543 -2.5e-4,-2.24273 -1.28912,-4.06061 -2.8789,-4.06054 z"
+     id="path4173"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccccccccccccccccccccccc" />
+  <path
+     style="fill:#0523c1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 920.00842,301.6682 4.4288,-1.77994 5.50244,1.5061 -1.87888,2.73836 3.69067,-0.13691 0,1.05883 -10.66937,0.51573 0,-1.5061 z"
+     id="path4178"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccccccccc" />
 </svg>
