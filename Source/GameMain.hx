@@ -5,18 +5,30 @@ import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.events.KeyboardEvent;
 import openfl.geom.Point;
+import openfl.geom.Rectangle;
 
-class GameMain extends Sprite  {
+class GameMain extends GameObject  {
   var gameField:GameField;
+
+  /**
+   * Dragging
+   */
   var dragging:Bool = false;
   var dragging_current:Point = new Point();
   var dragging_last:Point = new Point();
 
-  var policeGroup:TroopGroup = new TroopGroup();
-  var group:TroopGroup = new TroopGroup();
+  /**
+   * Selection
+   */
+  var selection_start:Point;
+  var selection:Selection;
+  var selection_group:TroopGroup;
 
   public function new() {
     super();
+
+    var policeGroup:TroopGroup = new TroopGroup();
+    var group:TroopGroup = new TroopGroup();
 
     gameField = new GameField();
     addChild(gameField);
@@ -28,7 +40,6 @@ class GameMain extends Sprite  {
     }
 
     group.goto(300, 0, true, gameField);
-
 
     for(i in 0...50) {
       var p = new BlueTroop();
@@ -59,6 +70,22 @@ class GameMain extends Sprite  {
       dragging = true;
       dragging_current.x = stage.mouseX;
       dragging_current.y = stage.mouseY;
+    } else {
+      var pos:Point = globalToLocal(new Point(stage.mouseX, stage.mouseY));
+
+      if(selection_group!=null) {
+        selection_group.goto(pos.x, pos.y, false, gameField);
+        selection_group = null;
+      }else{
+
+        selection_start = pos;
+
+        selection = new Selection();
+        selection.x = pos.x;
+        selection.y = pos.y;
+        addChild(selection);
+
+      }
     }
   }
 
@@ -74,13 +101,16 @@ class GameMain extends Sprite  {
       gameField.x += draggin_delta.x;
       gameField.y += draggin_delta.y;
     }
+
+    if(selection != null) {
+
+    }
   }
 
   public function onStageMouseUp(event:MouseEvent) : Void {
     if (!dragging) {
-      var pos = gameField.globalToLocal(new Point(stage.mouseX, stage.mouseY));
-
-      group.goto(pos.x, pos.y, false, gameField);
+      removeChild(selection);
+      selection = null;
     } else {
       dragging = false;
     }
@@ -104,5 +134,50 @@ class GameMain extends Sprite  {
 
     stage.removeEventListener(KeyboardEvent.KEY_DOWN, onStageKeyDown);
     stage.removeEventListener(KeyboardEvent.KEY_UP, onStageKeyUp);
+  }
+
+  override function update(delta:Float) : Void {
+    if(selection != null) {
+      var pos:Point = globalToLocal(new Point(stage.mouseX, stage.mouseY));
+      var delta:Point = new Point(pos.x - selection_start.x, pos.y - selection_start.y);
+
+      if(pos.x < selection_start.x) {
+        selection.x = pos.x;
+      }
+
+      if(pos.y < selection_start.y) {
+        selection.y = pos.y;
+      }
+
+      selection.selWidth = Math.abs(delta.x);
+      selection.selHeight = Math.abs(delta.y);
+
+      var sel_rect:Rectangle = new Rectangle(selection.x, selection.y, selection.selWidth, selection.selHeight);
+
+      var red_troops:Array<Troop> = gameField.getTroops().filter(function(t:Troop) {
+        return Std.is(t, RedTroop);
+      });
+
+      for(tr in red_troops) {
+        var bound:Rectangle = tr.getBounds(this);
+        if(sel_rect.intersects(bound)) {
+          tr.selected = true;
+        }else{
+          tr.selected = false;
+        }
+      }
+
+      selection_group = new TroopGroup();
+      var selected_troops:Array<Troop> = red_troops.filter(function(troop) {
+        if(troop.selected) {
+          selection_group.add(troop);
+        }
+        return troop.selected;
+      });
+
+      if(selected_troops.length==0) {
+        selection_group = null;
+      }
+    }
   }
 }

@@ -2,12 +2,10 @@ package ;
 
 import openfl.display.Sprite;
 import openfl.geom.Point;
-import motion.Actuate;
 
 class TroopGroup {
   var troops:Array<Troop> = new Array<Troop>();
   var groupWidth:Int = 5;
-  var pos:Point = new Point(0,0);
 
   /**
    * Constructor
@@ -35,7 +33,7 @@ class TroopGroup {
     troops = troops.filter(function(t) {
       return t.healthPoints>0;
       });
-      
+
     troops.sort(function(a:Troop,b:Troop):Int {
         var la = Math.pow(x - a.x,2) + Math.pow(y - a.y, 2);
         var lb = Math.pow(x - b.x,2) + Math.pow(y - b.y, 2);
@@ -104,8 +102,5 @@ class TroopGroup {
     }
 
     at.removeChild(space);
-
-    pos.x = x;
-    pos.y = y;
   }
 }

@@ -7,6 +7,8 @@ import motion.Actuate;
 import motion.easing.Linear;
 
 class Troop extends GameObject  {
+  public var selected(default, set):Bool;
+
   static var bitmapData: Map<String, BitmapData> = new Map<String, BitmapData>();
   var bitmap: Bitmap;
 
@@ -19,6 +21,11 @@ class Troop extends GameObject  {
   var fighting:Bool = false;
 
   public var healthPoints:Float = 10;
+
+  function set_selected(value:Bool):Bool {
+    alpha = value ? 0.8 : 1;
+    return selected = value;
+  }
 
   public function new() {
     super();
