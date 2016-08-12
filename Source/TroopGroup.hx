@@ -73,8 +73,8 @@ class TroopGroup {
       obj.graphics.drawRect(-10, -10, 20, 20);
       obj.graphics.endFill();
 
-      obj.x = distr[distr.length-1-col] * 30;
-      obj.y = row * 30;
+      obj.x = distr[distr.length-1-col] * 25;
+      obj.y = row * 25;
 
       space.addChild(obj);
 
